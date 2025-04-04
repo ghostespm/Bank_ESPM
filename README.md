@@ -1,122 +1,41 @@
 # Programação Orientada a Objetos
 
-Exemplo de Hello World!
-```java
-package poo.aula01;
+# Sistema de Controle de Contas Bancárias
 
-public class Hello {
+Este é um exercício simples de controle de contas bancárias, onde o sistema gerencia clientes e suas respectivas contas. O sistema pode ser acessado via terminal e tem como objetivo praticar conceitos de programação orientada a objetos.
 
-    public static void main(String[] args) {
-        System.out.println("Ola Mundo!");
-    }
-    
-}
-```
+## Pontuação
+- Implementação básica via terminal: **9 pontos**
+- Implementação com interface gráfica: **+1 ponto**
 
+## Funcionalidades Mínimas
 
-## Docker
+O sistema deve implementar as seguintes funcionalidades:
 
-Baixe o Docker Desktop no site oficial: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+1. **Cadastro de Cliente**:
+   - Permitir o cadastro de clientes, que podem ser **Pessoa Física** ou **Pessoa Jurídica**.
+   
+2. **Cadastro de Contas**:
+   - O sistema deve permitir o cadastro de **contas correntes** (com ou sem limite), **contas poupança** (sem limite e com rendimento) e **contas de rendimento** (somente com rendimento).
 
-Docker é um gerenciador de containers, onde cada containers é uma emulação de uma máquina virtual, porém mais leve e mais rápido.
+3. **Operações Bancárias**:
+   - O sistema deve permitir **saques** e **depósitos**, respeitando as regras de cada tipo de conta.
 
-Exemplo de Docker file:
-```Dockerfile
-FROM ubuntu:latest
-RUN apt-get update
-RUN apt-get install -y iputils-ping
-CMD ["tail", "-f", "/dev/null"]
-```
+4. **Listagem de Clientes e Contas**:
+   - O sistema deve permitir listar todos os **clientes** cadastrados e suas respectivas **contas**.
 
-### Comandos do terminal
+5. **Remoção de Clientes e Contas**:
+   - O sistema deve permitir a **remoção de clientes**, juntamente com suas **contas**.
 
-Para criar uma imagem a partir de um Dockerfile, utilize o comando:
-```bash
-docker build -t espm-ubuntu .
-```
+## Requisitos Obrigatórios
 
-Para executar um container a partir de uma imagem, utilize o comando:
-```bash
-docker run espm-ubuntu
-```
+A implementação do sistema deve seguir os seguintes requisitos:
 
-Para trabalhar com cluster de containers, utilize o Docker Compose. Exemplo de arquivo compose.yaml:
-```yaml
-name: espm-store
-
-services:
-
-  db:
-    image: postgres:latest
-```
-
-Para subir o cluster de containers, utilize o comando:
-```bash
-docker compose up -d
-````
-
-Para parar o cluster de containers, utilize o comando:
-```bash
-docker compose down
-```
-
-### Exercício 1
-
-Identifique os objetos no problema abaixo:
-
-- Um cinema pode ter muitas salas, sendo necessário, portanto, registrar informações a respeito de cada sala, como sua capacidade (número de lugares disponíveis).
-
-- O cinema apresenta vários filmes. Um filme tem informações como título e duração. Sempre que um filme for adquirido deverá ser registrado;
-
-- Um filme pode ter vários atores.
-
-``` mermaid
-classDiagram
-    class Sala {
-        - String nome
-        - int capacidade
-        + abrir()
-        + fechar()
-    }
-    class Filme {
-        - String titulo
-        - int duracao
-        - String classificacao
-        - Genero genero
-        - List< Ator> atores
-        + registrar() Filme
-    }
-    class Genero {
-        - String nome
-        + registrar() Genero
-    }
-    class Ator {
-        - String nome
-        - Date dtNascimento
-    }
-    class Sessao {
-        - Filme Filme
-        - DateTime datetime
-        - Sala sala
-    }
-    Filme <|-- Genero
-    Filme <|-- Ator
-    Sessao <|-- Filme
-    Sessao <|-- Sala
-```
-
-
-### Exercício 2
-
-Identifique os objetos no problema abaixo:
-
-- Um clube tem muitos sócios e precisa manter informações referente a eles, como o número
-do seu cartão de sócio, endereço, telefone e e-mail.
-
-- Um sócio pode ter nenhum ou vários dependentes.
-
-- Um sócio deve pagar mensalidades para poder frequentar o clube. Serão cobrados juros sobre o valor da mensalidade relativos ao atraso do pagamento. As informações pertinentes a cada mensalidade são a data de pagamento, o valor, a data em que foi efetivamente paga e juros aplicados.
-
+- **Uso de classes**: A estrutura do sistema deve ser orientada a objetos.
+- **Uso de interfaces**: Interfaces devem ser utilizadas para representar contratos de comportamento.
+- **Sobrecarga de métodos e construtores**: A sobrecarga de métodos e construtores é obrigatória para permitir diferentes formas de criar e manipular objetos.
+- **Uso de casting**: O sistema deve fazer uso de **casting** para manipular diferentes tipos de objetos.
+- **Listagem com forEach**: A listagem de clientes e contas deve ser feita utilizando o método **forEach**.
 
 ### Diagrama de Classes do Banco
 
