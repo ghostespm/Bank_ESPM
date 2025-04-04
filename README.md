@@ -39,34 +39,89 @@ A implementação do sistema deve seguir os seguintes requisitos:
 
 ``` mermaid
 classDiagram
+    class Banco {
+        - String name
+        - List~Cliente~ clientes
+        - List~Conta~ contas
+        + adicionarCliente(Cliente cliente)
+        + removerCliente(Cliente cliente)
+        + listarClientes()
+        + adicionarConta(Conta conta)
+        + removerConta(Conta conta)
+        + listarContas()
+        + transferir(String chavePixOrigem, String chavePixDestino, double valor)
+    }
+
+    class Cliente {
+        - String id
+        - String name
+        + getId() String
+        + getName() String
+    }
+
+    class PessoaFisica {
+        - String cpf
+        + getCpf() String
+    }
+
+    class PessoaJuridica {
+        - String cnpj
+        + getCnpj() String
+    }
+
     class Conta {
         - String id
         # double saldo
         - Cliente cliente
+        - List~Transacao~ transacoes
         + sacar(double valor)
         + depositar(double valor)
+        + getSaldo() double
+        + getTransacoes() List~Transacao~
     }
-    class Cliente {
-        - String id
-        - String nome
-        - List<Conta> contas
-    }
-    class PessoaFisica {
-        - String cpf
-    }
-    class PessoaJuridica {
-        - String cnpj
-    }
+
     class ContaCorrente {
         - double limite
         + sacar(double valor)
     }
+
     class ContaPoupanca {
+        - double taxaRendimento
         + sacar(double valor)
+        + aplicarRendimento()
     }
-    Conta *-- Cliente
-    Conta <|-- ContaCorrente
-    Conta <|-- ContaPoupanca
+
+    class ContaRendimento {
+        - double taxaRendimento
+        + aplicarRendimento()
+    }
+
+    class Transacao {
+        - String tipo
+        - double valor
+        - LocalDateTime dataHora
+        + getTipo() String
+        + getValor() double
+        + getDataHora() LocalDateTime
+    }
+
+    class Terminal {
+        - Banco banco
+        + run()
+    }
+
+    class Util {
+        + isCpf(String cpf) boolean
+    }
+
+    Banco *-- Cliente
+    Banco *-- Conta
     Cliente <|-- PessoaFisica
     Cliente <|-- PessoaJuridica
+    Conta o-- Cliente
+    Conta <|-- ContaCorrente
+    Conta <|-- ContaPoupanca
+    Conta <|-- ContaRendimento
+    Conta *-- Transacao
+    Terminal ..> Banco
 ```
