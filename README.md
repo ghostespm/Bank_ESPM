@@ -1,31 +1,122 @@
-# BANK ESPM
+# Programação Orientada a Objetos
+
+Exemplo de Hello World!
+```java
+package poo.aula01;
+
+public class Hello {
+
+    public static void main(String[] args) {
+        System.out.println("Ola Mundo!");
+    }
+    
+}
+```
+
+
+## Docker
+
+Baixe o Docker Desktop no site oficial: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+
+Docker é um gerenciador de containers, onde cada containers é uma emulação de uma máquina virtual, porém mais leve e mais rápido.
+
+Exemplo de Docker file:
+```Dockerfile
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install -y iputils-ping
+CMD ["tail", "-f", "/dev/null"]
+```
+
+### Comandos do terminal
+
+Para criar uma imagem a partir de um Dockerfile, utilize o comando:
+```bash
+docker build -t espm-ubuntu .
+```
+
+Para executar um container a partir de uma imagem, utilize o comando:
+```bash
+docker run espm-ubuntu
+```
+
+Para trabalhar com cluster de containers, utilize o Docker Compose. Exemplo de arquivo compose.yaml:
+```yaml
+name: espm-store
+
+services:
+
+  db:
+    image: postgres:latest
+```
+
+Para subir o cluster de containers, utilize o comando:
+```bash
+docker compose up -d
+````
+
+Para parar o cluster de containers, utilize o comando:
+```bash
+docker compose down
+```
 
 ### Exercício 1
 
-O exercício 1 é um sistema simples de controle de contas bancárias e seus saldo acessível via terminal (9 pontos), se implementado usando interface gráfica ganha 1 ponto.
+Identifique os objetos no problema abaixo:
 
-O mínimo que o sistema deve ter:
+- Um cinema pode ter muitas salas, sendo necessário, portanto, registrar informações a respeito de cada sala, como sua capacidade (número de lugares disponíveis).
 
-1. Cadastro de cliente (Pessoa Física/Jurídica);
+- O cinema apresenta vários filmes. Um filme tem informações como título e duração. Sempre que um filme for adquirido deverá ser registrado;
 
-2. Cadastro de contas para o cliente:
-- Conta corrente (tem ou não limite);
-- Conta poupança (não tem limite e rende);
-- Conta rendimento (apenas rende);
+- Um filme pode ter vários atores.
 
-3. Permitir saques/depósitos (respeitando as regras das conta);
+``` mermaid
+classDiagram
+    class Sala {
+        - String nome
+        - int capacidade
+        + abrir()
+        + fechar()
+    }
+    class Filme {
+        - String titulo
+        - int duracao
+        - String classificacao
+        - Genero genero
+        - List< Ator> atores
+        + registrar() Filme
+    }
+    class Genero {
+        - String nome
+        + registrar() Genero
+    }
+    class Ator {
+        - String nome
+        - Date dtNascimento
+    }
+    class Sessao {
+        - Filme Filme
+        - DateTime datetime
+        - Sala sala
+    }
+    Filme <|-- Genero
+    Filme <|-- Ator
+    Sessao <|-- Filme
+    Sessao <|-- Sala
+```
 
-4. Listar contas e clientes.
 
-5. Remover clientes e suas contas do banco.
+### Exercício 2
 
-Obrigatório:
+Identifique os objetos no problema abaixo:
 
-a. uso de classes, interfaces;
+- Um clube tem muitos sócios e precisa manter informações referente a eles, como o número
+do seu cartão de sócio, endereço, telefone e e-mail.
 
-b. sobrecarga de métodos e construtores;
+- Um sócio pode ter nenhum ou vários dependentes.
 
-c. uso de casting e listagem por forEach.
+- Um sócio deve pagar mensalidades para poder frequentar o clube. Serão cobrados juros sobre o valor da mensalidade relativos ao atraso do pagamento. As informações pertinentes a cada mensalidade são a data de pagamento, o valor, a data em que foi efetivamente paga e juros aplicados.
+
 
 ### Diagrama de Classes do Banco
 
