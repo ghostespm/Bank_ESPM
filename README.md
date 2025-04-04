@@ -1,5 +1,3 @@
-# Programação Orientada a Objetos
-
 # Sistema de Controle de Contas Bancárias
 
 Este é um exercício simples de controle de contas bancárias, onde o sistema gerencia clientes e suas respectivas contas. O sistema pode ser acessado via terminal e tem como objetivo praticar conceitos de programação orientada a objetos.
